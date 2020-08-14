@@ -24,6 +24,7 @@ public class Crawler {
             item.setTitle(e.children().attr("title"));
             String url = link + e.getAllElements().attr("href");
             item.setUrl(url);
+            item.setPublisher("dantri.com.vn");
             newsList.add(item);
         }
         for(int i=0; i<newsList.size(); i++){
@@ -58,6 +59,7 @@ public class Crawler {
             item.setTitle(e.getAllElements().attr("title"));
             String url = link + e.getAllElements().attr("href");
             item.setUrl(url);
+            item.setPublisher("genk.vn");
             newsList.add(item);
         }
         for(int i=0; i<newsList.size(); i++){
