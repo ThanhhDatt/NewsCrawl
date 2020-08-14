@@ -1,13 +1,13 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
     <title>Home</title>
 </head>
 <body>
 <div>
-    <p>Genk Crawler</p>
-    <p>Dantri Crawler</p>
+    <a th:href="@{/genk}">Genk Crawler</a>
+    <a th:href="@{/dantri}">Dantri Crawler</a>
 </div>
 </body>
 </html>

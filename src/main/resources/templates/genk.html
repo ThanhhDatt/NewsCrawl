@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<div align="center">
+    <p>News Crawler from Genk</p>
+    <table border="1" cellpadding="10">
+        <tr>
+            <th>Title</th>
+            <th>Publisher</th>
+            <th>Time</th>
+            <th>Link to article</th>
+            <th>Content</th>
+        </tr>
+        <tr th:each="news : ${genk}">
+            <td th:text="${news.getTitle()}">Title</td>
+            <td th:text="${news.getPublisher()}">Publisher</td>
+            <td th:text="${news.getTime()}">Time</td>
+            <td>
+                <a th:href="${news.getUrl()}">
+                    <span th:text="${news.getUrl()}">Link to article</span>
+                </a>
+            </td>
+            <td th:text="${news.getContent()}">Content</td>
+        </tr>
+    </table>
+</div>
+</body>
+</html>

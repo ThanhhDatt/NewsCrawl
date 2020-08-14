@@ -14,16 +14,20 @@ import java.util.ArrayList;
 public class Crawler {
     static DateTimeFormatter dtf = DateTimeFormatter.ofPattern("yyyy/MM/dd HH:mm:ss");
     static LocalDateTime now = LocalDateTime.now();
+
     public static ArrayList<NewsEntity> DantriCrawler() throws IOException {
         ArrayList<NewsEntity> newsList = new ArrayList<>();
         String link = "https://dantri.com.vn/";
         Document document = Jsoup.connect(link).timeout(5000).get();
         Elements news = document.select("h3[class=news-item__title]");
+//        Element time = document.selectFirst("span[class=dt-news__time]");
         for(Element e : news){
             NewsEntity item = new NewsEntity();
             item.setTitle(e.children().attr("title"));
             String url = link + e.getAllElements().attr("href");
             item.setUrl(url);
+//            item.setTime(time.text());
+            item.setPublisher("dantri.com.vn");
             newsList.add(item);
         }
         for(int i=0; i<newsList.size(); i++){
@@ -39,12 +43,6 @@ public class Crawler {
             }
             newsList.get(i).setContent(contentPage);
         }
-        System.out.println("All News in time: " + dtf.format(now) + "\n");
-        for(NewsEntity newsTmp : newsList){
-            System.out.println("Title: " + newsTmp.getTitle());
-            System.out.println("Link: " + newsTmp.getUrl());
-            System.out.println("Opening: " + newsTmp.getOpening() + "\n");
-        }
         return newsList;
     }
 
@@ -58,6 +56,7 @@ public class Crawler {
             item.setTitle(e.getAllElements().attr("title"));
             String url = link + e.getAllElements().attr("href");
             item.setUrl(url);
+            item.setPublisher("genk.vn");
             newsList.add(item);
         }
         for(int i=0; i<newsList.size(); i++){
@@ -72,12 +71,6 @@ public class Crawler {
                 contentInPage+="\n";
             }
             newsList.get(i).setContent(contentInPage);
-        }
-        System.out.println("All News in time: " + dtf.format(now) + "\n");
-        for(NewsEntity newsTmp : newsList){
-            System.out.println("Title: " + newsTmp.getTitle());
-            System.out.println("Link: " + newsTmp.getUrl());
-            System.out.println("Opening: " + newsTmp.getOpening() + "\n");
         }
         return newsList;
     }

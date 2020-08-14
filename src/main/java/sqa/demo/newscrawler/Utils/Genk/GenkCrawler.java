@@ -25,6 +25,7 @@ public class GenkCrawler{
             item.setTitle(e.getAllElements().attr("title"));
             String url = link + e.getAllElements().attr("href");
             item.setUrl(url);
+            item.setPublisher("Genk");
             newsList.add(item);
         }
         for(int i=0; i<newsList.size(); i++){
@@ -41,12 +42,6 @@ public class GenkCrawler{
             newsList.get(i).setContent(contentInPage);
         }
         System.out.println("All News in time: " + dtf.format(now) + "\n");
-        for(NewsEntity newsTmp : newsList){
-            System.out.println("Title: " + newsTmp.getTitle());
-            System.out.println("Link: " + newsTmp.getUrl());
-            System.out.println("Opening: " + newsTmp.getOpening() + "\n");
-        }
-
         return newsList;
     }
 }

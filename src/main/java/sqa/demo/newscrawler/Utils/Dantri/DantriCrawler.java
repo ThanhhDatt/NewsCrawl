@@ -11,10 +11,6 @@ import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 
-import static sqa.demo.newscrawler.Utils.Dantri.ParseToJson.parseNews;
-import static sqa.demo.newscrawler.Utils.Dantri.WriteToFile.writeToAJsonFile;
-import static sqa.demo.newscrawler.Utils.Dantri.WriteToFile.writeToFile;
-
 public class DantriCrawler {
 
     static DateTimeFormatter dtf = DateTimeFormatter.ofPattern("yyyy/MM/dd HH:mm:ss");
@@ -23,13 +19,14 @@ public class DantriCrawler {
     public static ArrayList<NewsEntity> DantriCrawler() throws IOException {
         ArrayList<NewsEntity> newsList = new ArrayList<>();
         String link = "https://dantri.com.vn/";
-        Document document = Jsoup.connect(link).timeout(5000).get();
+        Document document = Jsoup.connect(link).timeout(10000).get();
         Elements news = document.select("h3[class=news-item__title]");
         for(Element e : news){
             NewsEntity item = new NewsEntity();
             item.setTitle(e.children().attr("title"));
             String url = link + e.getAllElements().attr("href");
             item.setUrl(url);
+            item.setPublisher("Dantri");
             newsList.add(item);
         }
         for(int i=0; i<newsList.size(); i++){
@@ -46,11 +43,6 @@ public class DantriCrawler {
             newsList.get(i).setContent(contentPage);
         }
         System.out.println("All News in time: " + dtf.format(now) + "\n");
-        for(NewsEntity newsTmp : newsList){
-            System.out.println("Title: " + newsTmp.getTitle());
-            System.out.println("Link: " + newsTmp.getUrl());
-            System.out.println("Opening: " + newsTmp.getOpening() + "\n");
-        }
         return newsList;
     }
 }
