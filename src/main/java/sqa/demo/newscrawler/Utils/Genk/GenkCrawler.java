@@ -39,9 +39,16 @@ public class GenkCrawler{
                 contentInPage += e.select("p").text();
                 contentInPage+="\n";
             }
+            System.out.println(contentInPage);
             newsList.get(i).setContent(contentInPage);
         }
-        System.out.println("All News in time: " + dtf.format(now) + "\n");
         return newsList;
+    }
+
+    public static void main(String[] args) throws IOException {
+        ArrayList<NewsEntity> genk = GenkCrawler();
+        for(NewsEntity news : genk){
+            System.out.println("Title: " + news.getTitle());
+        }
     }
 }

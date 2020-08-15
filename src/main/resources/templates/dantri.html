@@ -18,7 +18,6 @@
         <tr th:each="news : ${dantri}">
             <td th:text="${news.getTitle()}">Title</td>
             <td th:text="${news.getPublisher()}">Publisher</td>
-<!--            <td th:text="${news.getTime()}">Time</td>-->
             <td>
                 <a th:href="${news.getUrl()}">
                     <span th:text="${news.getUrl()}">Link to article</span>

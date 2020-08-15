@@ -1,9 +1,13 @@
 package sqa.demo.newscrawler.Model;
 
+import lombok.Getter;
+import lombok.Setter;
 import org.springframework.boot.autoconfigure.domain.EntityScan;
 
 import javax.persistence.*;
 
+@Getter
+@Setter
 @Entity
 @EntityScan(basePackages = {"NewsCrawler.Model"})
 public class NewsEntity {

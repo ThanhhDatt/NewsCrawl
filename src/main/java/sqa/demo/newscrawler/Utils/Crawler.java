@@ -20,13 +20,11 @@ public class Crawler {
         String link = "https://dantri.com.vn/";
         Document document = Jsoup.connect(link).timeout(5000).get();
         Elements news = document.select("h3[class=news-item__title]");
-//        Element time = document.selectFirst("span[class=dt-news__time]");
         for(Element e : news){
             NewsEntity item = new NewsEntity();
             item.setTitle(e.children().attr("title"));
             String url = link + e.getAllElements().attr("href");
             item.setUrl(url);
-//            item.setTime(time.text());
             item.setPublisher("dantri.com.vn");
             newsList.add(item);
         }
@@ -34,6 +32,11 @@ public class Crawler {
             Document document1 = Jsoup.connect(newsList.get(i).getUrl()).timeout(5000).get();
             Element opening = document1.selectFirst("div[class=dt-news__sapo]");
             Elements content = document1.select("div[class=dt-news__content]");
+            if(opening == null || opening.select("h2") == null){
+//                System.out.println("Ngu vc");
+//                Object o = opening.select("h2");
+                continue;
+            }
             String openingContent = opening.select("h2").text();
             newsList.get(i).setOpening(openingContent);
             String contentPage = "";
